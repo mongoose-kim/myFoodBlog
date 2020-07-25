@@ -1,0 +1,76 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+<style>
+    @font-face { font-family: 'CookieRunOTF-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff'); font-weight: normal; font-style: normal; }
+    @font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+    @font-face { font-family: 'RIDIBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+    table {
+        font-family: "RIDIBatang"; 
+        font-weight: normal; 
+        font-style: normal; 
+    }
+
+    a.nav-link, a.navbar-brand {
+        font-family: "CookieRunOTF-Bold"; 
+        font-weight: normal; 
+        font-style: normal; 
+    } 
+
+    p.log-text, p.acc-text {
+      font-family: "GmarketSansMedium"; 
+      font-size: small;
+    }
+
+    a.dropdown-item {
+        font-family: "GmarketSansMedium"; 
+        font-size: medium;
+        font-weight: normal; 
+    }
+
+</style>
+<body>
+    <nav class="navbar navbar-light" style="background-color: #E4F6F2;">
+        <a class="navbar-brand" href="{% url 'home' %}">&#x1F308; FOOD DIARY </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'footprint' %}">방명록</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                맛집리스트
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'popolo' %}">포폴로피자</a>
+                <a class="dropdown-item" href="{% url 'maum' %}">마음식당</a>
+                <a class="dropdown-item" href="{% url 'bookkyung' %}">북경마라샹궈</a>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+    </nav>
+
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        <table>
+            {{form.as_p}}
+        </table>
+        <input class="btn btn-dark" type="submit" value="완료">
+    
+    </form>
+</div>

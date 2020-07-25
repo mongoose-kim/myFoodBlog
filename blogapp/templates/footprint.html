@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </head>
+    <style>
+        @font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'Cafe24Oneprettynight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'CookieRunOTF-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+        
+        a.nav-link, a.navbar-brand {
+            font-family: "CookieRunOTF-Bold"; 
+            font-weight: normal; 
+            font-style: normal; 
+        } 
+
+        a.dropdown-item {
+            font-family: "GmarketSansMedium"; 
+            font-size: medium;
+            font-weight: normal; 
+        }
+
+        h5.card-title {
+            font-family: "Cafe24Oneprettynight"; 
+            font-weight: bold; 
+            font-style: normal; 
+            color: black;
+        }
+
+        p.card-text {
+            font-family: "Cafe24Oneprettynight"; 
+            font-weight: bold; 
+            font-style: normal; 
+            font-size: medium;
+            color: black;
+        }
+
+        a.ud-text {
+            font-family: "Cafe24Oneprettynight"; 
+            font-weight: bold; 
+            font-style: normal; 
+            font-size: medium;
+        }
+
+        a.create-text {
+            font-family: "GmarketSansMedium"; 
+            font-size: normal;
+        }
+    </style>
+
+    <nav class="navbar navbar-light" style="background-color: #E4F6F2;">
+        <a class="navbar-brand" href="{% url 'home' %}">&#x1F308; FOOD DIARY </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'footprint' %}">방명록</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                맛집리스트
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'popolo' %}">포폴로피자</a>
+                <a class="dropdown-item" href="{% url 'maum' %}">마음식당</a>
+                <a class="dropdown-item" href="{% url 'bookkyung' %}">북경마라샹궈</a>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+    </nav>
+
+        <div class="container">
+            <a class="create-text" href="{% url 'create' %}">방명록 쓰기</a>
+            <br>
+            {% for blog in posts %}
+            <div class="card mb-3" style="max-width: 1000px;">
+                <div class="row no-gutters">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{blog.title}}</h5>
+                        <p class="card-text">{{blog.body}}</p>
+                        <a class="ud-text" href = "{% url 'update' blog.id %}">수정</a>
+                        <a class="ud-text" href = "{% url 'delete' blog.id %}">삭제</a>
+                        <p class="card-text"><small class="text-muted">date  |  {{blog.pub_date}}</div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        
+        <!-- 처음 이전 3/4 다음 끝 -->
+        <div class="container">
+        {%if posts.has_previous%}
+        <a href="?page=1">처음</a>
+        <a href="?page={{posts.previous_page_number}}">이전</a>
+        {% endif %}
+
+        <span>{{posts.number}}</span>
+        <span>/</span>
+        <span>{{posts.paginator.num_pages}}</span>
+
+        {%if posts.has_next%}
+        <a href="?page={{posts.next_page_number}}">다음</a>
+        <a href="?page={{posts.paginator.num_pages_number}}">끝</a>
+        {% endif %}
+        </div>
+    </body>
+</html>

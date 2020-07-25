@@ -1,0 +1,125 @@
+{% load socialaccount %}
+{% providers_media_js %}
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+<style>
+    @font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+    @font-face { font-family: 'CookieRunOTF-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff'); font-weight: normal; font-style: normal; }
+    @font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+    
+    a.nav-link, a.navbar-brand {
+        font-family: "CookieRunOTF-Bold"; 
+        font-weight: normal; 
+        font-style: normal; 
+    } 
+
+    p.log-text, p.acc-text {
+      font-family: "GmarketSansMedium"; 
+      font-size: small;
+    }
+
+    a.dropdown-item {
+        font-family: "GmarketSansMedium"; 
+        font-size: medium;
+        font-weight: normal; 
+    }
+
+    p.info-text1 {
+      font-family: "GmarketSansMedium"; 
+      font-size: 21px;
+      font-weight: bold; 
+    }
+
+    p.info-text2, div.card-header {
+      font-family: "GmarketSansMedium"; 
+      font-size: 17px;
+      color: black;
+    }
+</style>
+  
+<nav class="navbar navbar-light" style="background-color: #E4F6F2;">
+  <a class="navbar-brand" href="{% url 'home' %}">&#x1F308; FOOD DIARY </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'footprint' %}">방명록</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          맛집리스트
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'popolo' %}">포폴로피자</a>
+          <a class="dropdown-item" href="{% url 'maum' %}">마음식당</a>
+          <a class="dropdown-item" href="{% url 'bookkyung' %}">북경마라샹궈</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+
+<a class="acc-text" href="/accounts/signup">Sign up</a><br>
+
+{% if user.is_authenticated %}
+<a class="acc-text" href="/accounts/logout">Logout</a>
+<p class="log-text">{{user.username}} 님이 로그인 중</p>
+
+{% else %}
+<a class="acc-text" href="{% url 'account_login' %}">Login</a><br>
+<a class="acc-text" href="{% provider_login_url 'google' %}">Google Login</a>
+<p class="log-text">로그인이 필요합니다</p>
+
+{% endif %}
+
+<body>
+  <div class="container">
+      <p class="info-text1">찐 일산러가 숨겨진 일산맛집을 추천해드립니다!</p>
+      <p class="info-text2">2n년간 일산에서 살아온 경험을 토대로 소개해드립니다.</p>
+      <br>
+      <br>
+      
+      <p class="info-text1">지금까지 올라온 맛집들</p>
+      {% for blog in blog.all %}
+      <image src="{{blog.image_thumbnail.url}}"></image>
+      {% endfor %}
+
+      <br><br><br><br><br><br><br>
+
+      <p class="info-text1">전체 맛집리스트</p>
+      {% for blog in blog.all %}
+      <br>
+      <table>
+        <div class="card border-info mb-3" style="max-width: 22rem;">
+          {% if blog.text == '포폴로피자' %}
+          <div class="card-header"><a href="{% url 'popolo' %}">{{blog.text}}</a></div>
+
+          {% elif blog.text == '북경마라샹궈' %}
+          <div class="card-header"><a href="{% url 'bookkyung' %}">{{blog.text}}</a></div>
+
+          {% elif blog.text == '마음식당' %}
+          <div class="card-header"><a href="{% url 'maum' %}">{{blog.text}}</a></div>
+
+          {% endif %}
+
+          <div class="card-body text-info">
+            <img src="{{blog.image.url}}" width = 300></p>
+          </div>
+        </div>
+      </table>
+      {% endfor %}
+
+  </div>
+</body>

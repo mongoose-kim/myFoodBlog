@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <title>포폴로피자</title>
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=tvumrvp3sy"></script>
+    </head>
+    <style>
+        @font-face { font-family: 'Cafe24Oneprettynight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'CookieRunOTF-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'CookieRunOTF-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff'); font-weight: normal; font-style: normal; }
+        
+        p.food-title{
+            font-family: "Cafe24Oneprettynight"; 
+            font-weight: bold; 
+            font-style: normal; 
+            font-size: xx-large;
+        }
+
+        a.nav-link, a.navbar-brand {
+            font-family: "CookieRunOTF-Bold"; 
+            font-weight: normal; 
+            font-style: normal; 
+        } 
+
+        a.dropdown-item {
+            font-family: "GmarketSansMedium"; 
+            font-size: medium;
+            font-weight: normal; 
+        }
+
+        p.food-menu {
+            font-family: "Cafe24Oneprettynight"; 
+            font-weight: bold; 
+            font-style: normal; 
+            font-size: large;
+        }
+    </style>
+
+    <nav class="navbar navbar-light" style="background-color: #E4F6F2;">
+        <a class="navbar-brand" href="{% url 'home' %}">&#x1F308; FOOD DIARY </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'footprint' %}">방명록</a>
+            </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                맛집리스트
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'popolo' %}">포폴로피자</a>
+                <a class="dropdown-item" href="{% url 'maum' %}">마음식당</a>
+                <a class="dropdown-item" href="{% url 'bookkyung' %}">북경마라샹궈</a>
+            </div>
+            </li>
+
+        </ul>
+        </div>
+    </nav>
+
+    <body>
+        <div class="container">
+            <p class="food-title">포폴로피자</p>
+            <p class="food-menu">대표메뉴 : 비스마르크 (14,600원)</p>
+            <br>
+            <div id="map" style="width:500px;height:400px;"></div>
+
+            <script>
+
+                var cityhall = new naver.maps.LatLng(37.654744,126.772619),
+                    map = new naver.maps.Map('map', {
+                        center: cityhall.destinationPoint(0, 100),
+                        zoom: 17
+                    }),
+                    marker = new naver.maps.Marker({
+                        map: map,
+                        position: cityhall
+                    });
+
+                var contentString = [
+                        '<div class="iw_inner">',
+                        '   <br /><h4>포폴로피자</h4>',
+                        '   <p>경기도 고양시 일산동구 장항동 정발산로 43-20<br />',
+                        '   Tel : +82319329337<br />',
+                        '   </p>',
+                        '</div>'
+                    ].join('');
+
+                var infowindow = new naver.maps.InfoWindow({
+                    content: contentString
+                });
+
+                naver.maps.Event.addListener(marker, "click", function(e) {
+                    if (infowindow.getMap()) {
+                        infowindow.close();
+                    } else {
+                        infowindow.open(map, marker);
+                    }
+                });
+
+                infowindow.open(map, marker);
+            </script>
+        </div>
+    </body>
+</html>
